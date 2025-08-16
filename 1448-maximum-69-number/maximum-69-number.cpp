@@ -7,7 +7,7 @@ public:
         temp /= 10;
         cnt++;
     }
-       return (pos==-1)?num: int(num + (3*pow(10,pos)));
+       return (pos==-1)?num: (num + (3*pow(10,pos)));
     }
 };
 
