@@ -16,7 +16,9 @@ public:
                 ans = p.first;
             }
             else if(maxfreq == p.second){
-                ans = min(ans,p.first);
+                if(p.first<ans){
+                    ans=p.first;
+                }
             }
         }
         return ans;
