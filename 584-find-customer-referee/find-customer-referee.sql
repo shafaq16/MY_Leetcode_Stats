@@ -1,7 +1,12 @@
 # Write your MySQL query statement below
 
--- #METHOD 3 - IFNULL(expression,Alt_value) function;
-SELECT name FROM Customer WHERE IFNULL(referee_id,0) <> 2;
+-- #METHOD 4 - COALESCE function;
+SELECT name FROM Customer WHERE COALESCE(referee_id, 0) <> 2;
+
+
+
+-- -- #METHOD 3 - IFNULL(expression,Alt_value) function;
+-- SELECT name FROM Customer WHERE IFNULL(referee_id,0) <> 2;
 
 
 
