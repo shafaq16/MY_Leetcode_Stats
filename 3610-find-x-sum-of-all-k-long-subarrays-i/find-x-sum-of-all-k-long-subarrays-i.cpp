@@ -1,35 +1,42 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
+    int xSum(unordered_map<int,int>& mp, int x) {
+        priority_queue<pair<int,int>> pq;
+        for (auto& v : mp) {
+            pq.push({v.second,v.first});
+        }
+        int sum = 0;
+        while (!pq.empty() && x > 0) {
+            auto num = pq.top();
+            pq.pop();
+            int cnt = num.first;
+            int val = num.second;
+            sum += cnt*val;
+            x--;
+        }
+        return sum;
+    }
+
     vector<int> findXSum(vector<int>& nums, int k, int x) {
         int n = nums.size();
         vector<int> ans;
+        unordered_map<int,int> mp;
 
-        for (int i = 0; i <= n - k; i++) {
-            vector<int> sub(nums.begin() + i, nums.begin() + i + k);
-            unordered_map<int, int> freq;
-            for (int num : sub) {
-                freq[num]++;
-            }
-            vector<pair<int, int>> items(freq.begin(), freq.end());
-            sort(items.begin(), items.end(), [](auto &a, auto &b) {
-                if (a.second == b.second) return a.first > b.first;
-                return a.second > b.second;
-            });
-            unordered_set<int> top_x;
-            for (int j = 0; j < items.size() && j < x; j++) {
-                top_x.insert(items[j].first);
-            }
-            int x_sum = 0;
-            for (int num : sub) {
-                if (top_x.count(num)) x_sum += num;
-            }
+        int i = 0, j= 0;
+        while(j<n){
+            mp[nums[j]]++;
 
-            ans.push_back(x_sum);
+            if(j-i+1 == k){
+                ans.push_back(xSum(mp,x));
+
+                mp[nums[i]]--;
+                if(mp[nums[i]] == 0){
+                    mp.erase(nums[i]);
+                }
+                i++;
+            }
+            j++;
         }
-
-        return ans;
+       return ans;
     }
 };
