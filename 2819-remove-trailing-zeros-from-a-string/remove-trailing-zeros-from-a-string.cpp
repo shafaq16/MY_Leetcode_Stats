@@ -1,31 +1,48 @@
+// //------------------   METHOD 1   ---------------------------
+// // class Solution {
+// // public:
+// //     string removeTrailingZeros(string num) {
+// //         int idx;
+// //         for(int i = num.length()-1; i>=0; i--){
+// //             if(num[i]!= '0'){
+// //                 idx = i;
+// //                 break;
+// //             }
+// //         }
+// //         string ans ="";
+// //         for(int i=0; i<=idx; i++){
+// //             ans += num[i];
+// //         }
+// //         return  ans;
+// //     }
+// // };
+
+
+
+// ----------------    METHOD 2    --------------
 // class Solution {
 // public:
 //     string removeTrailingZeros(string num) {
-//         int idx;
-//         for(int i = num.length()-1; i>=0; i--){
-//             if(num[i]!= '0'){
+//         int idx = -1;
+//         for(int i = num.length() - 1; i >= 0; i--){
+//             if(num[i] != '0'){   // fix
 //                 idx = i;
 //                 break;
 //             }
 //         }
-//         string ans ="";
-//         for(int i=0; i<=idx; i++){
-//             ans += num[i];
-//         }
-//         return  ans;
+//         return num.substr(0, idx + 1);  // simpler extraction
 //     }
 // };
 
+
+
+//------------      METHOD 3       -------------
 class Solution {
 public:
     string removeTrailingZeros(string num) {
-        int idx = -1;
-        for(int i = num.length() - 1; i >= 0; i--){
-            if(num[i] != '0'){   // fix
-                idx = i;
-                break;
-            }
+        while(num.back() == '0'){
+            num.pop_back();
         }
-        return num.substr(0, idx + 1);  // simpler extraction
+        return num;
     }
 };
